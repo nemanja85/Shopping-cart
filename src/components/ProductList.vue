@@ -13,7 +13,7 @@ import shop from "@/api/shop"
 export default {
     data (){
         return {
-            product: []
+            products: []
         }
     },
     created(){
