@@ -8,8 +8,8 @@ export default new Vuex.Store({
     products: []
   },
   getters: {
-    productsCount() {
-
+    availableProducts: state => {
+      return state.products.filter(products => products.inventory > 0)
     }
   },
   mutations: {
