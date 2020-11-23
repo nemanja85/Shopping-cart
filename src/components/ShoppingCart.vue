@@ -9,6 +9,8 @@
             {{product.title}} - {{product.price | currency}} - {{product.quantity}}
             </li>
             <p>Total :{{total | currency}} </p>
+            <button @click="store.dispach('checkout')">Checkout</button>
+            <p v-if="$store.state.checkoutStatus">{{$store.state.checkoutStatus}}</p>
         </ul>
     </div>    
 </template>

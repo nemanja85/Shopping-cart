@@ -7,7 +7,8 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
     products: [],
-    cart: []
+    cart: [],
+    chekoutStatus: null
   },
   getters: {
     availableProducts: state => {
@@ -42,6 +43,12 @@ export default new Vuex.Store({
     },
     decrementProduct(state, product){
       product.inventory--
+    },
+    setCheckoutStatus(state, status) {
+      state.chekoutStatus = status
+    },
+    emptyCart(state) {
+      state.cart = []
     }
   },
   actions: {
@@ -64,6 +71,18 @@ export default new Vuex.Store({
         }
       }
       context.commit('decrementProduct', product)
+    },
+    checkout(state, commit) {
+      shop.buyProducts(
+        state.cart,
+        () => {
+          commit('emptyCart')
+          commit('setCheckoutStatus', 'success')
+        },
+        () => {
+          commit('setCheckoutStatus', 'fail')
+        }
+      )      
     }
   },
   modules: {
