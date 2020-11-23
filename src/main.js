@@ -1,8 +1,10 @@
 import Vue from 'vue'
 import App from './App.vue'
 import store from './store'
+import {currency} from '@/Currency.vue'
 
 Vue.config.productionTip = false
+Vue.filter('currency', currency)
 
 new Vue({
   store,
