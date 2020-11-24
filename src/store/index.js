@@ -26,6 +26,11 @@ export default new Vuex.Store({
     },
     cartTotal(state, getters){
       return getters.cartProducts.reduce((total, product) => total + product.price + product.quantity, 0)
+    },
+    productInStock() {
+      return (product) => {
+        return product.inventory > 0
+      }
     }
   },
   mutations: {
