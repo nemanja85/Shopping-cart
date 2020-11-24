@@ -10,20 +10,23 @@
             </li>
             <p>Total :{{total | currency}} </p>
             <button @click="store.dispach('checkout')">Checkout</button>
-            <p v-if="$store.state.checkoutStatus">{{$store.state.checkoutStatus}}</p>
+            <p v-if="checkoutStatus">{{checkoutStatus}}</p>
         </ul>
     </div>    
 </template>
 
 <script>
+import {mapState, mapGetters} from 'vuex'
 export default {
     computed: {
-        product() {
-            return this.store.getters.cartProducts
-        },
-        total() {
-            return this.store.getters.cartTotal
-        }
+         // spread operators (ES7)
+         ...mapState({
+             checkoutStatus: 'checkoutStatus'
+         }),
+         ...mapGetters({
+             products: 'cartProducts',
+             total: 'cartTotal'
+         })
     }
 }
 </script>

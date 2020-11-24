@@ -1,10 +1,7 @@
 <template>
     <div>
         <h1>Product List</h1>
-        <img   
-        v-if="loading" 
-        src="https://i.imgur.com/4yT15sl.gif" />
-        <ul v-else>
+        <ul>
             <li 
             v-for="product in products" :key="product.id">
             {{product.title}} - {{product.price | currency}}
@@ -18,6 +15,7 @@
 </template>
 
 <script>
+import {mapState, mapGetters, mapActions} from 'vuex'
 
 export default {
     data () {
@@ -26,21 +24,23 @@ export default {
         }
     },
     computed: {
-        products () {
-            return this.$store.state.products
-        },
-        productInStock () {
-            return this.$store.getters.productInStock
-        }
+        // spread operators (ES7)
+        ...mapState({
+        products: state => state.products
+        }),
+        ...mapGetters({
+            productInStock: 'productInStock'
+        })
     }, 
     methods: {
-        addProductToCard (product) {
-            this.$store.dispach('pushProductToCart', product)
-        }
+        ...mapActions({
+            fetchProducts: 'fetchProducts',
+            addProductToCard: 'addProductToCard',
+        })
     },   
     created(){
        this.loading = true
-       this.$store.dispach('fetchProducts')
+       this.fetchProducts()
        .then(() => this.loading = false)
     }
 }
