@@ -57,10 +57,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    fetchProducts(commit) {
+    fetchProducts(context) {
       return new Promise((resolve) =>{
         shop.getProducts(products =>{
-          commit("setProducts", products)
+          context.commit("setProducts", products)
           resolve()
         })
       })

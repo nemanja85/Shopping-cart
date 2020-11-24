@@ -1,13 +1,16 @@
 <template>
     <div>
         <h1>Product List</h1>
-        <ul>
+        <img    
+        v-if="loading" 
+        src="https://i.imgur.com/4yT15sl.gif"  />
+        <ul v-else>
             <li 
             v-for="product in products" :key="product.id">
             {{product.title}} - {{product.price | currency}}
             <button 
             :disabled="!productInStock(product)"
-            @click="addProductToCard(product)">
+            @click="addToCard(product)">
             </button>
             </li>
         </ul>
@@ -35,7 +38,7 @@ export default {
     methods: {
         ...mapActions({
             fetchProducts: 'fetchProducts',
-            addProductToCard: 'addProductToCard',
+            addToCard: 'addToCard'
         })
     },   
     created(){
