@@ -19,7 +19,7 @@
 import {mapState, mapGetters} from 'vuex'
 export default {
     computed: {
-         // spread operator (ES7)
+         // spread operators (ES7)
          ...mapState({
              checkoutStatus: 'checkoutStatus'
          }),
