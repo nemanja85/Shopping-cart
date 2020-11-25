@@ -27,7 +27,7 @@ export default {
         }
     },
     computed: {
-        // spread operators (ES7)
+        // spread operator (ES7)
         ...mapState({
         products: state => state.products
         }),
